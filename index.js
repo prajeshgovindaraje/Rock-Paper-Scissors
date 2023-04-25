@@ -1,15 +1,20 @@
-const random = Math.floor(Math.random()*3)+1
+
 const rock_btn = document.getElementById("rock-btn")
 const paper_btn = document.getElementById("paper-btn")
 const scissor_btn = document.getElementById("scissor-btn")
+let comp_move =" "
 
 
 function message(user,comp,result){
-  alert(`You picked ${user}. Computer picked ${comp}. Game ${result}`)
+  alert(`You picked ${user}. Computer picked ${comp}. Game ${result} 
+Won-${score.won}. Lost-${score.lost}. Tie-${score.tie}`)
 }
 
+let score = {won:0,lost:0,tie:0}
+console.log(score)
 
-let comp_move =" "
+function chooseCompMove(){
+  const random = Math.floor(Math.random()*3)+1
   if(random === 1){
     comp_move ="Paper"
   }
@@ -19,46 +24,68 @@ let comp_move =" "
   else{
     comp_move ="Scissor"
   }
-console.log(comp_move)
+}
 
-rock_btn.addEventListener("click",function(){
-  if(comp_move == "Rock"){
-    message("Rock","Rock","Tie")
-  }
-  else if(comp_move == "Scissor"){
-    message("Rock","Scissor","Won")
-  }
-  else{
-    message("Rock","Paper","Lost")
 
-  }
-})
+function playGame(userMove){
+  
 
-paper_btn.addEventListener("click",function(){
-  if(comp_move == "Paper"){
-    message("Paper","Paper","Tie")
-  }
-  else if(comp_move == "Scissor"){
-    message("Paper","Rock","Won")
-  }
-  else{
-    message("Paper","Scissor","Lost")
+  chooseCompMove()
 
-  }
-})
+  
 
-scissor_btn.addEventListener("click",function(){
-  if(comp_move == "Scissor"){
-    message("Scissor","Scissor","Tie")
+  if(userMove === "Rock"){
+    if(comp_move === "Rock"){
+      score.tie += 1
+      message("Rock","Rock","Tie")
+    }
+    else if(comp_move === "Scissor"){
+      score.won += 1
+      message("Rock","Scissor","Won")
+    }
+    else{
+      score.lost += 1
+      message("Rock","Paper","Lost")
+  
+    }
   }
-  else if(comp_move == "Paper"){
-    message("Scissor","Paper","Won")
-  }
-  else{
-    message("Scissor","Rock","Lost")
 
+  if(userMove === "Paper"){
+    if(comp_move === "Paper"){
+      score.tie += 1
+      message("Paper","Paper","Tie")
+
+    }
+    else if(comp_move === "Scissor"){
+      score.won += 1
+      message("Paper","Rock","Won")
+    }
+    else{
+      score.lost += 1
+      message("Paper","Scissor","Lost")
+  
+    }
   }
-})
+
+
+  if(userMove === "Scissor"){
+    if(comp_move === "Scissor"){
+      score.tie += 1
+      message("Scissor","Scissor","Tie")
+    }
+    else if(comp_move === "Paper"){
+      score.won += 1
+      message("Scissor","Paper","Won")
+    }
+    else{
+      score.lost += 1
+      message("Scissor","Rock","Lost")
+  
+    }
+  }
+
+}
+
 
 
 
