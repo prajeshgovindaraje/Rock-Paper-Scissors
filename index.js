@@ -2,15 +2,19 @@
 const rock_btn = document.getElementById("rock-btn")
 const paper_btn = document.getElementById("paper-btn")
 const scissor_btn = document.getElementById("scissor-btn")
+let score_area = document.querySelector(".js-score-area")
 let comp_move =" "
 
 
-function message(user,comp,result){
-  alert(`You picked ${user}. Computer picked ${comp}. Game ${result} 
-Won-${score.won}. Lost-${score.lost}. Tie-${score.tie}`)
+function displayScore(user,comp,result,resultArea){
+
+  resultArea.textContent = `You picked ${user}. Computer picked ${comp}. Game ${result}`
+  score_area.textContent = `Won:${score.won}, Lost:${score.lost}, Tie:${score.tie}`
+
 }
 
 let score = {won:0,lost:0,tie:0}
+
 console.log(score)
 
 function chooseCompMove(){
@@ -32,20 +36,23 @@ function playGame(userMove){
 
   chooseCompMove()
 
+  let resultArea = document.querySelector(".js-result-area")
+
+
   
 
   if(userMove === "Rock"){
     if(comp_move === "Rock"){
       score.tie += 1
-      message("Rock","Rock","Tie")
+      displayScore("Rock","Rock","Tie",resultArea)
     }
     else if(comp_move === "Scissor"){
       score.won += 1
-      message("Rock","Scissor","Won")
+      displayScore("Rock","Scissor","Won",resultArea)
     }
     else{
       score.lost += 1
-      message("Rock","Paper","Lost")
+      displayScore("Rock","Paper","Lost",resultArea)
   
     }
   }
@@ -53,16 +60,16 @@ function playGame(userMove){
   if(userMove === "Paper"){
     if(comp_move === "Paper"){
       score.tie += 1
-      message("Paper","Paper","Tie")
+      displayScore("Paper","Paper","Tie",resultArea)
 
     }
     else if(comp_move === "Scissor"){
       score.won += 1
-      message("Paper","Rock","Won")
+      displayScore("Paper","Rock","Won",resultArea)
     }
     else{
       score.lost += 1
-      message("Paper","Scissor","Lost")
+      displayScore("Paper","Scissor","Lost",resultArea)
   
     }
   }
@@ -71,15 +78,15 @@ function playGame(userMove){
   if(userMove === "Scissor"){
     if(comp_move === "Scissor"){
       score.tie += 1
-      message("Scissor","Scissor","Tie")
+      displayScore("Scissor","Scissor","Tie",resultArea)
     }
     else if(comp_move === "Paper"){
       score.won += 1
-      message("Scissor","Paper","Won")
+      displayScore("Scissor","Paper","Won",resultArea)
     }
     else{
       score.lost += 1
-      message("Scissor","Rock","Lost")
+      displayScore("Scissor","Rock","Lost",resultArea)
   
     }
   }
@@ -88,4 +95,9 @@ function playGame(userMove){
 
 
 
+function resetGame(){
 
+  score = {won:0,lost:0,tie:0}
+  score_area.textContent = `Won:${score.won}, Lost:${score.lost}, Tie:${score.tie}`
+
+}
